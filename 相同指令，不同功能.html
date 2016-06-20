@@ -31,9 +31,6 @@
 			restrict:'AE',
 			link:function(scope,element,attr){
 				element.bind('mouseenter',function(){
-					// scope.loadData();
-					// scope.$apply('loadData()')
-					
 					scope.$apply(attr.howtoload)
 				})
 			}

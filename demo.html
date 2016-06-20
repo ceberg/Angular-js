@@ -10,26 +10,27 @@
 </head>
 	<body>
 		<div ng-app="myApp" ng-controller='demo'>
-			<hello></hello>
+			<hello howtoload='cc()'></hello>
 		</div>
 		<script>
-		var app=angular.module('myApp',[])
-		app.directive('hello',function(){
-			return{
-				restrict:'AE',
-				template:'<h1>自定义内容！</h1>',
-				link:function(scope,elem,attr){
-					elem.bind('click',function(){
-						scope.cc()
-					})
+			var app=angular.module('myApp',[])
+			app.controller('demo',function($scope){
+				$scope.cc=function(){
+					console.log('55')
 				}
-			}
-		})
-		app.controller('demo',function($scope){
-			$scope.cc=function(){
-				alert('55')
-			}
-		})
+			})
+			app.directive('hello',function(){
+				return{
+					restrict:'AE',
+					template:'<h1>自定义内容！</h1>',
+					link:function(scope,element,attr){
+						element.bind('mouseenter',function(){
+							scope.$apply(attr.howtoload)
+						})
+					}
+				}
+			})
+			
 		</script>
 	</body>
 </html>
