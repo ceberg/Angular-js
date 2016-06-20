@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>内联列表</title>
+	<script src='js/angular-1.3.0.js'></script>
+</head>
+<body ng-app='myModule'>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength>动感超人---力量</superman>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength speed>动感超人---力量,速度</superman>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength speed light>动感超人---力量，速度，发光</superman>
+		</div>
+	</div>
+</body>
+<script>
+	var myModule=angular.module('myModule',[])
+	myModule.directive('superman',function(){
+		return{
+			scope:{},
+			restrict:'AE',
+			// 和之前的controller不一样，这个是指令内部的controller
+			// 想让指令暴露出一些方法给web调用，就写在controller中
+			// link是用来处理指令内部的一些事物的
+			controller:function($scope){
+				$scope.abilities=[],
+				this.addStrength=function(){
+					$scope.abilities.push('strength');
+				}
+				this.addSpeed=function(){
+					$scope.abilities.push('speed');
+				}
+				this.addLight=function(){
+					$scope.abilities.push('light');
+				}
+			},
+
+			link:function(scope,element,attr){
+				element.addClass('btn btn-primary')
+				element.bind('mouseenter',function(){
+					console.log(scope.abilities)
+				})
+			}
+		}
+	})
+	myModule.directive('strength',function(){
+		return{
+			// 功能依赖于wuperman模块
+			require:'^superman',
+			link:function(scope,element,attr,supermanCtrl){
+				supermanCtrl.addStrength();
+			}
+		}
+	})
+	myModule.directive('speed',function(){
+		return{
+			// 功能依赖于wuperman模块
+			require:'^superman',
+			link:function(scope,element,attr,supermanCtrl){
+				supermanCtrl.addSpeed();
+			}
+		}
+	})
+	myModule.directive('light',function(){
+		return{
+			// 功能依赖于wuperman模块
+			require:'^superman',
+			link:function(scope,element,attr,supermanCtrl){
+				supermanCtrl.addLight();
+			}
+		}
+	})
+</script>
+</html>
