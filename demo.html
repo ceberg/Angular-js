@@ -2,21 +2,25 @@
 <html>
 <head>
 	<script src='js/angular-1.3.0.js'></script>
+	<style>
+
+	</style>
 </head>
 <body ng-app='myApp'>
-<div my-directive my-url='http://baidu.com' my-link-text='Click me to go to baidu'></div>
+	<div ng-controller="MyController"> 
+	  <h5>{{ clock }}</h5> 
+	</div> 
+
+
 <script type="text/javascript">
-	angular.module('myApp',[]).directive('myDirective',function(){
-		return{
-			restrict:'A',
-			template:'<a href="{{myUrl}}">{{myLinkText}}</a>',
-			replace:true,
-			scope:{
-				myUrl:'@',
-				myLinkText:'@'
-			}
-		}
-	})
+var app=angular.module('myApp',[])
+app.controller('MyController', function($scope) {  
+	$scope.person = { name: "Ari Lerner" };  
+	var updateClock = function() {    
+		$scope.clock = new Date();  };  
+	var timer = setInterval(function() {    
+		$scope.$apply(updateClock);  }, 1000);  updateClock();}); 
+
 </script>
 </body>
 </html>

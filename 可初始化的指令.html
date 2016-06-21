@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<script src='js/angular-1.3.0.js'></script>
+	<style>
+.odd {
+background-color: blue;
+}
+.even {
+background-color: red;
+}
+	</style>
+</head>
+<body ng-app='myApp' >
+	<div ng-controller='MainController'>
+	Outside myDirective: {{ myProperty }}
+		<div my-directive ng-init="myProperty = 'wow, this is cool'">
+		Inside myDirective: {{ myProperty }}
+		</div>
+	</div>
+<script type="text/javascript">
+angular.module('myApp', []).controller('MainController', function($scope) {}).directive('myDirective', function() {
+	return {
+		restrict: 'A',
+		scope: {},
+		priority: 100,
+		template: '<div>Inside myDirective {{ myProperty }}</div>'
+	};
+});
+</script>
+</body>
+</html>
