@@ -1,36 +1,29 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>内联列表</title>
 	<script src='js/angular-1.3.0.js'></script>
-	<style>
-		.error{color:orange;}
-	</style>
 </head>
-	<body>
-		<div ng-app="myApp" ng-controller='demo'>
-			<hello howtoload='cc()'></hello>
-		</div>
-		<script>
-			var app=angular.module('myApp',[])
-			app.controller('demo',function($scope){
-				$scope.cc=function(){
-					console.log('55')
-				}
-			})
-			app.directive('hello',function(){
-				return{
-					restrict:'AE',
-					template:'<h1>自定义内容！</h1>',
-					link:function(scope,element,attr){
-						element.bind('mouseenter',function(){
-							scope.$apply(attr.howtoload)
-						})
-					}
-				}
-			})
-			
-		</script>
-	</body>
+<body ng-app='myApp' ng-controller='myCtrl'>
+<!-- <my-directive></my-directive> -->
+<div my-directive my-url='http://baidu.com' my-link-text='Click me go to baidu'></div>
+<!-- <div>{{name}}</div> -->
+
+<script type="text/javascript">
+	angular.module('myApp',[]).directive('myDirective',function(){
+		return{
+			restrict:'A',
+			template:'<a href="{{myUrl}}">{{myLinkText}}</a>',
+			replace:true,
+			// scope:{
+			// 	myUrl:'@',
+			// 	myLinkText:'@'
+			// }
+		}
+	})
+	angular.module('myApp',[]).controller('myCtrl',['$scope',function($scope){
+			$scope.myLinkText='wakawakaooo'
+		}])
+	// 这个demo有点不一样，因为div换成了a,但是href属性没有被替换而是得到了保留
+</script>
+</body>
 </html>
