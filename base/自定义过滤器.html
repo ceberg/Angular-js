@@ -12,8 +12,8 @@ background-color: red;
 	</style>
 </head>
 <body ng-app='myApp'>
-
-<p><span>{{ "this is some text" | capitalize }}</span> </p>
+<input type="text" ng-model='name'>
+<p><span>{{ name | capitalize }}</span> </p>
 
 <script type="text/javascript">
 var app=angular.module('myApp',[])

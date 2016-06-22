@@ -2,25 +2,30 @@
 <html>
 <head>
 	<script src='js/angular-1.3.0.js'></script>
+	<meta charset='utf-8'>
 	<style>
 
 	</style>
 </head>
 <body ng-app='myApp'>
-	<div ng-controller="MyController"> 
-	  <h5>{{ clock }}</h5> 
-	</div> 
-
+	<div ng-controller='myCtrl'>
+		<expander></expander>
+		<p>{{text}}</p>
+	</div>
 
 <script type="text/javascript">
 var app=angular.module('myApp',[])
-app.controller('MyController', function($scope) {  
-	$scope.person = { name: "Ari Lerner" };  
-	var updateClock = function() {    
-		$scope.clock = new Date();  };  
-	var timer = setInterval(function() {    
-		$scope.$apply(updateClock);  }, 1000);  updateClock();}); 
-
+app.directive('expander',function(){
+	return{
+		restrict:'EA',
+		replace:true,
+		template:'<div class="title" >{{title}}</div>',
+	}
+})
+app.controller('myCtrl',function($scope){
+	$scope.title='点击展开'
+	$scope.text='这是内部的内容'
+})
 </script>
 </body>
 </html>
