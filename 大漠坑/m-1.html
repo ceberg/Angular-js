@@ -6,35 +6,39 @@
 	<script src='js/angular-1.3.0.js'></script>
 </head>
 <body ng-app='myModule'>
-	<div ng-controller='MyCtrl'>
-		<loader howToLoad='loadData()'>滑动加载</loader>
+	<div ng-controller='MyCtrl1'>
+		<loader HowToLoad='loadData1()'>滑动加载</loader>
 	</div>
 	<div ng-controller='MyCtrl2'>
-		<loader howToLoad='loadData2()'>滑动加载</loader>
+		<loader HowToLoad='loadData2()'>滑动加载</loader>
 	</div>
 </body>
 <script>
 	var myModule=angular.module('myModule',[])
-	myModule.controller('MyCtrl',['$scope',function($scope){
-		$scope.loadData=function(){
-			console.log('加载数据中......');
-		}
-	}])	
-	myModule.controller('MyCtrl2',['$scope',function($scope){
-		$scope.loadData2=function(){
-			console.log('22222222......');
+	myModule.controller('MyCtrl1',['$scope',function($scope){
+		$scope.loadData1=function(){
+			console.log('1加载数据中......');
 		}
 	}])
-
+	myModule.controller('MyCtrl2',['$scope',function($scope){
+		$scope.loadData2=function(){
+			console.log('2加载数据中......');
+		}
+	}])
+	// 创建模块和模块函数，
 	myModule.directive('loader',function(){
 		return{
 			restrict:'AE',
+			template:'<h1>自定义内容！</h1>',
 			link:function(scope,element,attr){
-				element.bind('mouseenter',function(){
+				element.bind('mouseover',function(){
+					// scope.loadData();
+					
 					scope.$apply(attr.howtoload)
 				})
 			}
 		}
 	})
+	// 创建指令，并对指令绑定函数
 </script>
 </html>

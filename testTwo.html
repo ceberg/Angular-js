@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<script src='js/angular-1.3.0.js'></script>
+	<meta charset='utf-8'>
+	<style>
+
+	</style>
+</head>
+<body ng-app='myApp' ng-controller='myCtrl'>
+	<hello>我是你大爷</hello>
+	<!-- <p>{{text}}</p> -->
+</div>
+
+<script type="text/javascript">
+var myApp=angular.module('myApp',[])
+myApp.controller('myCtrl',['$scope',function($scope){0
+		$scope.text=5566
+}])
+myApp.directive('hello',function(){
+	return{
+		restrict:'AE',
+	                repalce:true,
+	                transclude:true,
+		template:'<p ng-click="toggle()">{{text}}</p><p ng-transclude ng-show="showMe"></p>',
+		link:function(scope,elem,attr){
+			scope.showMe=false
+			scope.toggle=function(){
+				scope.showMe=!scope.showMe
+			}
+		}
+	}
+})
+</script>
+</body>
+</html>
