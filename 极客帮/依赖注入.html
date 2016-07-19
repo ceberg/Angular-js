@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+</head>
+	
+<body style='padding:10px' ng-app='app'>
+	<div ng-controller='myCtrl1'>
+		<input type="text" ng-model='data.msg'>
+		<h1>{{data.msg}}</h1>
+	</div>		
+	<div ng-controller='myCtrl2'>
+		<input type="text" ng-model='data.msg'>
+		<h1>{{data.msg}}</h1>
+	</div>	
+	
+</body>
+	<script src='js/angular.min.js'></script>
+	<script>
+		angular.module('app',[])
+		
+		.controller('myCtrl1',function($scope,Data){
+			$scope.data=Data
+		})
+		.factory('Data',function(){
+			return{
+				msg:'我来自factory'
+			}
+		})
+		.controller('myCtrl2',function($scope,Data){
+			$scope.data=Data
+		})
+	</script>
+
+</html>

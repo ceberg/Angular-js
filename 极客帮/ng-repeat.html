@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style>
+		.tx{
+			width:50px;height:50px;margin-bottom: 10px;margin-left: 80px;
+			background: red;
+		}
+	</style>
+</head>
+	
+<body style='padding:10px' ng-app='app'>
+	<div ng-controller='AddressCtrl'>
+		<ul>
+			<li ng-repeat='item in list' ng-if='$index!=2'>
+				{{$index+1+'.'+item.address+$first+$last}}
+			</li>
+		</ul>
+	</div>	
+</body>
+	<script src='js/angular.min.js'></script>
+	<script>
+		angular.module('app',[])		
+		.controller('AddressCtrl',function($scope){
+			$scope.list=[
+				{id:1,address:'我是你大爷'},
+				{id:2,address:'我是你2大爷'},
+				{id:3,address:'我是你3大爷'},
+				{id:4,address:'我是你4大爷'}
+			];
+		})
+	</script>
+
+</html>

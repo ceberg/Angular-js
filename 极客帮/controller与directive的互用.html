@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style>
+		.tx{
+			width:50px;height:50px;margin-bottom: 10px;margin-left: 80px;
+			background: red;
+		}
+	</style>
+</head>
+	
+<body style='padding:10px' ng-app='app'>
+		<div ng-controller='appCtrl'>
+			<div enter='delData()'>我是你大爷</div>
+		</div>
+</body>
+	<script src='js/angular.min.js'></script>
+	<script>
+		var app=angular.module('app',[])
+		app.controller('appCtrl',function($scope){
+			$scope.loadMoreData=function(){
+				console.log('正在加载中。。。')
+			}
+			$scope.delData=function(){
+				console.log('正在删除中。。。')
+			}			
+		})
+		app.directive('enter',function(){
+			return function(scope,element,attrs){
+				element.bind('mouseenter',function(){
+					// scope.$apply('loadMoreData()')
+					// scope.loadMoreData()
+					scope.$apply(attrs.enter)
+				})
+			}	
+		})
+	</script>
+
+</html>
