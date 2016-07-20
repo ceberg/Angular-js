@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+</head>
+	
+<body style='padding:10px' ng-app='app'>
+	<div enter>我是你大爷</div>
+</body>
+	<script src='http://7nj1p4.com1.z0.glb.clouddn.com/xuzilingangular-1.3.0.js'></script>
+	<script>
+		var app=angular.module('app',[])
+		app.directive('enter',function(){
+			return function(scope,element,attrs){
+				element.bind('click',function(){
+					console.log('5')
+				})
+			}
+		})
+	</script>
+
+</html>
